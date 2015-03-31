@@ -16,6 +16,7 @@
 		E04835B71ACA9A4200BE745C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E04835B61ACA9A4200BE745C /* Images.xcassets */; };
 		E04835BA1ACA9A4200BE745C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E04835B81ACA9A4200BE745C /* LaunchScreen.xib */; };
 		E04835C61ACA9A4200BE745C /* SimpleReminderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E04835C51ACA9A4200BE745C /* SimpleReminderTests.m */; };
+		E04835D21ACA9B0400BE745C /* RJDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E04835D11ACA9B0400BE745C /* RJDataManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,8 @@
 		E04835BF1ACA9A4200BE745C /* SimpleReminderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleReminderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E04835C41ACA9A4200BE745C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E04835C51ACA9A4200BE745C /* SimpleReminderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimpleReminderTests.m; sourceTree = "<group>"; };
+		E04835D01ACA9B0400BE745C /* RJDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJDataManager.h; sourceTree = "<group>"; };
+		E04835D11ACA9B0400BE745C /* RJDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJDataManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +89,7 @@
 		E04835A21ACA9A4200BE745C /* SimpleReminder */ = {
 			isa = PBXGroup;
 			children = (
+				E04835CF1ACA9ADF00BE745C /* Singleton */,
 				E04835A71ACA9A4200BE745C /* AppDelegate.h */,
 				E04835A81ACA9A4200BE745C /* AppDelegate.m */,
 				E04835AD1ACA9A4200BE745C /* MasterViewController.h */,
@@ -125,6 +129,15 @@
 				E04835C41ACA9A4200BE745C /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E04835CF1ACA9ADF00BE745C /* Singleton */ = {
+			isa = PBXGroup;
+			children = (
+				E04835D01ACA9B0400BE745C /* RJDataManager.h */,
+				E04835D11ACA9B0400BE745C /* RJDataManager.m */,
+			);
+			name = Singleton;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,6 +245,7 @@
 				E04835A91ACA9A4200BE745C /* AppDelegate.m in Sources */,
 				E04835A61ACA9A4200BE745C /* main.m in Sources */,
 				E04835AC1ACA9A4200BE745C /* SimpleReminder.xcdatamodeld in Sources */,
+				E04835D21ACA9B0400BE745C /* RJDataManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
