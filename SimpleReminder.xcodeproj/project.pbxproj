@@ -10,13 +10,14 @@
 		E04835A61ACA9A4200BE745C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E04835A51ACA9A4200BE745C /* main.m */; };
 		E04835A91ACA9A4200BE745C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E04835A81ACA9A4200BE745C /* AppDelegate.m */; };
 		E04835AC1ACA9A4200BE745C /* SimpleReminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E04835AA1ACA9A4200BE745C /* SimpleReminder.xcdatamodeld */; };
-		E04835AF1ACA9A4200BE745C /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E04835AE1ACA9A4200BE745C /* MasterViewController.m */; };
-		E04835B21ACA9A4200BE745C /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E04835B11ACA9A4200BE745C /* DetailViewController.m */; };
 		E04835B51ACA9A4200BE745C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E04835B31ACA9A4200BE745C /* Main.storyboard */; };
 		E04835B71ACA9A4200BE745C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E04835B61ACA9A4200BE745C /* Images.xcassets */; };
 		E04835BA1ACA9A4200BE745C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E04835B81ACA9A4200BE745C /* LaunchScreen.xib */; };
 		E04835C61ACA9A4200BE745C /* SimpleReminderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E04835C51ACA9A4200BE745C /* SimpleReminderTests.m */; };
 		E04835D21ACA9B0400BE745C /* RJDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E04835D11ACA9B0400BE745C /* RJDataManager.m */; };
+		E04835D51ACAACC800BE745C /* RJEventsController.m in Sources */ = {isa = PBXBuildFile; fileRef = E04835D41ACAACC800BE745C /* RJEventsController.m */; };
+		E04835D81ACAAD5400BE745C /* RJCoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E04835D71ACAAD5400BE745C /* RJCoreDataTableViewController.m */; };
+		E07097D71ACAB25C0034C2BB /* RJEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = E07097D61ACAB25C0034C2BB /* RJEvent.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,10 +37,6 @@
 		E04835A71ACA9A4200BE745C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E04835A81ACA9A4200BE745C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		E04835AB1ACA9A4200BE745C /* SimpleReminder.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SimpleReminder.xcdatamodel; sourceTree = "<group>"; };
-		E04835AD1ACA9A4200BE745C /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
-		E04835AE1ACA9A4200BE745C /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
-		E04835B01ACA9A4200BE745C /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		E04835B11ACA9A4200BE745C /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		E04835B41ACA9A4200BE745C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E04835B61ACA9A4200BE745C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E04835B91ACA9A4200BE745C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -48,6 +45,12 @@
 		E04835C51ACA9A4200BE745C /* SimpleReminderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimpleReminderTests.m; sourceTree = "<group>"; };
 		E04835D01ACA9B0400BE745C /* RJDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJDataManager.h; sourceTree = "<group>"; };
 		E04835D11ACA9B0400BE745C /* RJDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJDataManager.m; sourceTree = "<group>"; };
+		E04835D31ACAACC800BE745C /* RJEventsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJEventsController.h; sourceTree = "<group>"; };
+		E04835D41ACAACC800BE745C /* RJEventsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJEventsController.m; sourceTree = "<group>"; };
+		E04835D61ACAAD5400BE745C /* RJCoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJCoreDataTableViewController.h; sourceTree = "<group>"; };
+		E04835D71ACAAD5400BE745C /* RJCoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJCoreDataTableViewController.m; sourceTree = "<group>"; };
+		E07097D51ACAB25C0034C2BB /* RJEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJEvent.h; sourceTree = "<group>"; };
+		E07097D61ACAB25C0034C2BB /* RJEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJEvent.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,10 +95,8 @@
 				E04835CF1ACA9ADF00BE745C /* Singleton */,
 				E04835A71ACA9A4200BE745C /* AppDelegate.h */,
 				E04835A81ACA9A4200BE745C /* AppDelegate.m */,
-				E04835AD1ACA9A4200BE745C /* MasterViewController.h */,
-				E04835AE1ACA9A4200BE745C /* MasterViewController.m */,
-				E04835B01ACA9A4200BE745C /* DetailViewController.h */,
-				E04835B11ACA9A4200BE745C /* DetailViewController.m */,
+				E07097D41ACAB2320034C2BB /* Models */,
+				E04835D91ACAB03800BE745C /* Model Controllers */,
 				E04835B31ACA9A4200BE745C /* Main.storyboard */,
 				E04835B61ACA9A4200BE745C /* Images.xcassets */,
 				E04835B81ACA9A4200BE745C /* LaunchScreen.xib */,
@@ -138,6 +139,26 @@
 				E04835D11ACA9B0400BE745C /* RJDataManager.m */,
 			);
 			name = Singleton;
+			sourceTree = "<group>";
+		};
+		E04835D91ACAB03800BE745C /* Model Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E04835D61ACAAD5400BE745C /* RJCoreDataTableViewController.h */,
+				E04835D71ACAAD5400BE745C /* RJCoreDataTableViewController.m */,
+				E04835D31ACAACC800BE745C /* RJEventsController.h */,
+				E04835D41ACAACC800BE745C /* RJEventsController.m */,
+			);
+			name = "Model Controllers";
+			sourceTree = "<group>";
+		};
+		E07097D41ACAB2320034C2BB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E07097D51ACAB25C0034C2BB /* RJEvent.h */,
+				E07097D61ACAB25C0034C2BB /* RJEvent.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,12 +261,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E04835B21ACA9A4200BE745C /* DetailViewController.m in Sources */,
-				E04835AF1ACA9A4200BE745C /* MasterViewController.m in Sources */,
+				E04835D51ACAACC800BE745C /* RJEventsController.m in Sources */,
 				E04835A91ACA9A4200BE745C /* AppDelegate.m in Sources */,
 				E04835A61ACA9A4200BE745C /* main.m in Sources */,
 				E04835AC1ACA9A4200BE745C /* SimpleReminder.xcdatamodeld in Sources */,
+				E07097D71ACAB25C0034C2BB /* RJEvent.m in Sources */,
 				E04835D21ACA9B0400BE745C /* RJDataManager.m in Sources */,
+				E04835D81ACAAD5400BE745C /* RJCoreDataTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,6 +458,7 @@
 				E04835CB1ACA9A4200BE745C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E04835CC1ACA9A4200BE745C /* Build configuration list for PBXNativeTarget "SimpleReminderTests" */ = {
 			isa = XCConfigurationList;
@@ -444,6 +467,7 @@
 				E04835CE1ACA9A4200BE745C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
