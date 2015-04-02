@@ -8,6 +8,8 @@
 
 #import "RJEventsController.h"
 #import "RJDataManager.h"
+#import "RJEventCell.h"
+#import "RJNewEventController.h"
 
 @interface RJEventsController ()
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
@@ -20,14 +22,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIColor *purple = [UIColor colorWithRed:0.625f green:0.166f blue:0.999f alpha:0.67f];
-    self.tabBarController.tabBar.tintColor = purple;
+//    UIColor *purple = [UIColor colorWithRed:0.625f green:0.166f blue:0.999f alpha:0.67f];
+//    self.tabBarController.tabBar.tintColor = purple;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    UIColor *purple = [UIColor colorWithRed:159/255 green:43/255 blue:255/255 alpha:0.67f];
-    [[UITabBar appearance] setBarTintColor:purple];
+//    UIColor *purple = [UIColor colorWithRed:159/255 green:43/255 blue:255/255 alpha:0.67f];
+//    [[UITabBar appearance] setBarTintColor:purple];
 }
 
 
@@ -37,8 +39,10 @@
 
 #pragma mark - Actions
 
-- (IBAction)actionAddUniversity:(id)sender {
-
+- (IBAction)actionAddEvent:(id)sender {
+    RJNewEventController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"RJNewEventController"];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 #pragma mark - NSFetchedResultsController
@@ -50,12 +54,12 @@
     }
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"RJUniversity" inManagedObjectContext:self.managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"RJEvent" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
     
     [fetchRequest setFetchBatchSize:20];
     
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES];
     NSArray *sortDescriptors = @[sortDescriptor];
     
     [fetchRequest setSortDescriptors:sortDescriptors];
@@ -79,29 +83,37 @@
 
 #pragma mark - UITableViewDataSource
 
-//- (void)configureCell:(RJUniversityInfoCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-//    RJUniversity *university = [self.fetchedResultsController objectAtIndexPath:indexPath];
-//    cell.universityName.text = university.name;
-//    cell.universityCountry.text = university.country;
-//    cell.universityRank.text = [NSString stringWithFormat:@"Rank: %ld", [university.rank integerValue]];
-//    cell.universityStudents.text = [NSString stringWithFormat:@"Students: %ld", [university.students count]];
-//    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//}
+- (void)configureCell:(RJEventCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 1) {
+        cell.tagView.backgroundColor = [UIColor redColor];
+        cell.eventTextLabel.text = @"Записаться к Оле на стрижку на четверг утро с пол первого до 10 и не забыть взять с собой зубную щетку с насадкой";
+    } else {
+        cell.tagView.backgroundColor = [UIColor clearColor];
+        cell.eventTextLabel.text = @"К зубному 03.04 в 16-30";
+    }
+}
 
-//- (RJUniversityInfoCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    static NSString *identifier = @"UniversityCell";
-//    RJUniversityInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-//    if (!cell) {
-//        cell = [[RJUniversityInfoCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
-//    }
-//    [self configureCell:cell atIndexPath:indexPath];
-//    return cell;
-//}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *identifierUntagged = @"EventCell";
+    static NSString *identifierTagged = @"EventCellTagged";
+    NSString *identifier;
+    if (indexPath.row == 0) {
+        identifier = identifierUntagged;
+    } else {
+        identifier = identifierTagged;
+    }
+    RJEventCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (!cell) {
+       cell = [[RJEventCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
+    }
+    [self configureCell:cell atIndexPath:indexPath];
+    return cell;
+}
 
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

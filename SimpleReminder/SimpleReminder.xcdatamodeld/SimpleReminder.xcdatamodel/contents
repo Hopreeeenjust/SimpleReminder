@@ -3,9 +3,9 @@
     <entity name="RJEvent" representedClassName="RJEvent">
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="isEnabled" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="priority" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="repeatInterval" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="tag" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="time" optional="YES" attributeType="Date" syncable="YES"/>
         <userInfo/>
     </entity>
     <elements>

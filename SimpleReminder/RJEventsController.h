@@ -10,6 +10,6 @@
 
 @interface RJEventsController : RJCoreDataTableViewController
 
-- (IBAction)actionAddUniversity:(id)sender;
+- (IBAction)actionAddEvent:(id)sender;
 
 @end

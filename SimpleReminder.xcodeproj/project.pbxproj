@@ -17,7 +17,9 @@
 		E04835D21ACA9B0400BE745C /* RJDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E04835D11ACA9B0400BE745C /* RJDataManager.m */; };
 		E04835D51ACAACC800BE745C /* RJEventsController.m in Sources */ = {isa = PBXBuildFile; fileRef = E04835D41ACAACC800BE745C /* RJEventsController.m */; };
 		E04835D81ACAAD5400BE745C /* RJCoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E04835D71ACAAD5400BE745C /* RJCoreDataTableViewController.m */; };
-		E07097D71ACAB25C0034C2BB /* RJEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = E07097D61ACAB25C0034C2BB /* RJEvent.m */; };
+		E0C9EA4E1ACBE6F60008FB27 /* RJEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E0C9EA4D1ACBE6F60008FB27 /* RJEventCell.m */; };
+		E0C9EA541ACC21D10008FB27 /* RJEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = E0C9EA531ACC21D10008FB27 /* RJEvent.m */; };
+		E0C9EA581ACC22900008FB27 /* RJNewEventController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0C9EA571ACC22900008FB27 /* RJNewEventController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,8 +51,12 @@
 		E04835D41ACAACC800BE745C /* RJEventsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJEventsController.m; sourceTree = "<group>"; };
 		E04835D61ACAAD5400BE745C /* RJCoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJCoreDataTableViewController.h; sourceTree = "<group>"; };
 		E04835D71ACAAD5400BE745C /* RJCoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJCoreDataTableViewController.m; sourceTree = "<group>"; };
-		E07097D51ACAB25C0034C2BB /* RJEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJEvent.h; sourceTree = "<group>"; };
-		E07097D61ACAB25C0034C2BB /* RJEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJEvent.m; sourceTree = "<group>"; };
+		E0C9EA4C1ACBE6F60008FB27 /* RJEventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJEventCell.h; sourceTree = "<group>"; };
+		E0C9EA4D1ACBE6F60008FB27 /* RJEventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJEventCell.m; sourceTree = "<group>"; };
+		E0C9EA521ACC21D10008FB27 /* RJEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJEvent.h; sourceTree = "<group>"; };
+		E0C9EA531ACC21D10008FB27 /* RJEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJEvent.m; sourceTree = "<group>"; };
+		E0C9EA561ACC22900008FB27 /* RJNewEventController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJNewEventController.h; sourceTree = "<group>"; };
+		E0C9EA571ACC22900008FB27 /* RJNewEventController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJNewEventController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,10 +99,12 @@
 			isa = PBXGroup;
 			children = (
 				E04835CF1ACA9ADF00BE745C /* Singleton */,
-				E04835A71ACA9A4200BE745C /* AppDelegate.h */,
-				E04835A81ACA9A4200BE745C /* AppDelegate.m */,
 				E07097D41ACAB2320034C2BB /* Models */,
 				E04835D91ACAB03800BE745C /* Model Controllers */,
+				E0C9EA551ACC22610008FB27 /* Controllers */,
+				E0C9EA4B1ACBE6C50008FB27 /* CustomCells */,
+				E04835A71ACA9A4200BE745C /* AppDelegate.h */,
+				E04835A81ACA9A4200BE745C /* AppDelegate.m */,
 				E04835B31ACA9A4200BE745C /* Main.storyboard */,
 				E04835B61ACA9A4200BE745C /* Images.xcassets */,
 				E04835B81ACA9A4200BE745C /* LaunchScreen.xib */,
@@ -155,10 +163,28 @@
 		E07097D41ACAB2320034C2BB /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E07097D51ACAB25C0034C2BB /* RJEvent.h */,
-				E07097D61ACAB25C0034C2BB /* RJEvent.m */,
+				E0C9EA521ACC21D10008FB27 /* RJEvent.h */,
+				E0C9EA531ACC21D10008FB27 /* RJEvent.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		E0C9EA4B1ACBE6C50008FB27 /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				E0C9EA4C1ACBE6F60008FB27 /* RJEventCell.h */,
+				E0C9EA4D1ACBE6F60008FB27 /* RJEventCell.m */,
+			);
+			name = CustomCells;
+			sourceTree = "<group>";
+		};
+		E0C9EA551ACC22610008FB27 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E0C9EA561ACC22900008FB27 /* RJNewEventController.h */,
+				E0C9EA571ACC22900008FB27 /* RJNewEventController.m */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,10 +289,12 @@
 			files = (
 				E04835D51ACAACC800BE745C /* RJEventsController.m in Sources */,
 				E04835A91ACA9A4200BE745C /* AppDelegate.m in Sources */,
+				E0C9EA541ACC21D10008FB27 /* RJEvent.m in Sources */,
 				E04835A61ACA9A4200BE745C /* main.m in Sources */,
 				E04835AC1ACA9A4200BE745C /* SimpleReminder.xcdatamodeld in Sources */,
-				E07097D71ACAB25C0034C2BB /* RJEvent.m in Sources */,
 				E04835D21ACA9B0400BE745C /* RJDataManager.m in Sources */,
+				E0C9EA581ACC22900008FB27 /* RJNewEventController.m in Sources */,
+				E0C9EA4E1ACBE6F60008FB27 /* RJEventCell.m in Sources */,
 				E04835D81ACAAD5400BE745C /* RJCoreDataTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
