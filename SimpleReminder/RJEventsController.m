@@ -23,14 +23,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.contentInset = UIEdgeInsetsMake(-1.0f, 0.0f, 0.0f, 0.0f);     //to hide header in section 0
-//    UIColor *purple = [UIColor colorWithRed:0.625f green:0.166f blue:0.999f alpha:0.67f];
-//    self.tabBarController.tabBar.tintColor = purple;
+    
+    UIColor *green = [UIColor colorWithRed:67.f/255 green:213.f/255 blue:81.f/255 alpha:1.f];
+    self.tabBarController.tabBar.tintColor = green;
+    
+    self.navigationItem.title = NSLocalizedString(@"Reminder", nil);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//    UIColor *purple = [UIColor colorWithRed:159/255 green:43/255 blue:255/255 alpha:0.67f];
-//    [[UITabBar appearance] setBarTintColor:purple];
 }
 
 
@@ -43,6 +44,7 @@
 - (IBAction)actionAddEvent:(id)sender {
     RJNewEventController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"RJNewEventController"];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    vc.navigationItem.title = NSLocalizedString(@"New", nil);
     [self presentViewController:nav animated:YES completion:nil];
 }
 

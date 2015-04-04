@@ -11,4 +11,5 @@
 @interface RJNewEventController : UITableViewController
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (weak, nonatomic) IBOutlet UIView *tagView;
+@property (weak, nonatomic) IBOutlet UILabel *tagLabel;
 @end
