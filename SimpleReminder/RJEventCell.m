@@ -19,5 +19,9 @@
     [super setSelected:selected animated:animated];
 }
 
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
+    [super setHighlighted:highlighted animated:animated];
+}
+
 @end
 

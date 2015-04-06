@@ -10,31 +10,23 @@
 #import "UIView+UITableViewCell.h"
 #import "RJRepeatIntervalController.h"
 #import "RJEventTextController.h"
-
-typedef NS_ENUM(NSInteger, RJTagColor) {
-    RJTagColorRed = 0,
-    RJTagColorOrange,
-    RJTagColorYellow,
-    RJTagColorGreen,
-    RJTagColorBlue,
-    RJTagColorPurple,
-    RJTagColorGray,
-    RJTagColorNone
-};
+#import "RJEvent.h"
+#import "RJDataManager.h"
 
 #define lightPurpleColor [UIColor colorWithRed:177.f/255 green:74.f/255 blue:255.f alpha:1.f]
 #define lightBlueColor [UIColor colorWithRed:63.f/255 green:168.f/255 blue:240.f/255 alpha:1.f]
 
 @interface RJNewEventController () <RJRepeatIntevalProtocol, RJEventTextProtocol>
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+
 @property (assign, nonatomic) CGFloat currentRowHeight;
 @property (strong, nonatomic) NSArray *tagButtons;
 @property (strong, nonatomic) NSArray *tagColors;
-@property (assign, nonatomic) RJTagColor selectedColor;
-@property (assign, nonatomic) NSTimeInterval selectedInterval;
-@property (strong, nonatomic) NSString *enteredText;
 @end
 
 static const CGFloat kRowHeight = 44.f;
+
+BOOL viewDidAppear;
 
 CGRect tagLabelRect;
 CGRect tagViewRect;
@@ -49,37 +41,54 @@ CGRect tagViewRect;
     
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(actionCancelButtonPushed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
-    self.navigationItem.leftBarButtonItem.tintColor = green;
     
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(actionSaveButtonPushed:)];
     self.navigationItem.rightBarButtonItem = saveButton;
-    self.navigationItem.rightBarButtonItem.tintColor = green;
+    
+    self.navigationController.navigationBar.tintColor = green;
     
     self.datePicker.timeZone = [NSTimeZone localTimeZone];
     self.datePicker.backgroundColor = [UIColor whiteColor];
     
     self.currentRowHeight = kRowHeight;
     
-    self.selectedInterval = 0;
-    self.enteredText = @"Reminder";
-    self.selectedColor = RJTagColorNone;
-    
     self.tagButtons = [NSArray new];
     self.tagColors = @[[UIColor redColor], [UIColor orangeColor], [UIColor yellowColor], [UIColor greenColor], lightBlueColor, lightPurpleColor, [UIColor lightGrayColor], [UIColor clearColor]];
     
+    viewDidAppear = NO;
+    
+    if (self.newEvent) {
+        [self setDefaultSettings];
+    }
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (!self.newEvent) {
+        [self setEventSettings];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    self.tagView.layer.cornerRadius = CGRectGetHeight(self.tagView.bounds) / 2;
-    self.tagView.clipsToBounds = YES;
     
     tagLabelRect = self.tagLabel.frame;
     tagViewRect = self.tagView.frame;
+    
+    viewDidAppear = YES;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark - NSManagedObjectContext
+
+- (NSManagedObjectContext *)managedObjectContext {
+    if (!_managedObjectContext) {
+        _managedObjectContext = [[RJDataManager sharedManager] managedObjectContext];
+    }
+    return _managedObjectContext;
 }
 
 #pragma mark - Action
@@ -89,6 +98,18 @@ CGRect tagViewRect;
 }
 
 - (void)actionSaveButtonPushed:(UIBarButtonItem *)sender {
+    RJEvent *event;
+    if (self.newEvent) {
+        event = [NSEntityDescription insertNewObjectForEntityForName:@"RJEvent" inManagedObjectContext:self.managedObjectContext];
+    } else {
+        event = self.currentEvent;
+    }
+    event.tag = [NSNumber numberWithInteger:self.selectedColor];
+    event.repeatInterval = [NSNumber numberWithInteger:self.selectedInterval];
+    event.text = self.enteredText;
+    event.isEnabled = [NSNumber numberWithBool:YES];
+    event.date = self.datePicker.date;
+    [[RJDataManager sharedManager] saveContext];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -206,15 +227,23 @@ CGRect tagViewRect;
 }
 
 - (void)showTagColor {
+    self.tagLabel.text = @"No tag";
     if (self.selectedColor == RJTagColorNone) {
-        self.tagLabel.text = @"No tag";
+        self.tagLabel.textColor = [UIColor colorWithRed:142.f/255 green:142.f/255 blue:147.f/255 alpha:1.f];
     } else {
-        self.tagLabel.text = @"";
+        self.tagLabel.textColor = [UIColor clearColor];
     }
     self.tagView.backgroundColor = [self.tagColors objectAtIndex:self.selectedColor];
     
-    self.tagLabel.frame = tagLabelRect;
-    self.tagView.frame = tagViewRect;
+    if (viewDidAppear) {
+        self.tagLabel.frame = tagLabelRect;
+        self.tagView.frame = tagViewRect;
+    }
+    
+    CGFloat tagViewHeight = 20.f;
+    
+    self.tagView.layer.cornerRadius = tagViewHeight / 2;
+    self.tagView.clipsToBounds = YES;
 }
 
 - (void)setStandartRowHeightAndHideButton:(UIButton *)button {
@@ -243,6 +272,24 @@ CGRect tagViewRect;
         [self.view removeGestureRecognizer:recognizer];
     }
 
+}
+
+- (void)setDefaultSettings {
+    self.selectedInterval = 0;
+    self.enteredText = @"Reminder";
+    self.selectedColor = RJTagColorNone;
+}
+
+- (void)setEventSettings {
+    UITableViewCell *intervalCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:1]];
+    intervalCell.detailTextLabel.text = [self showSelectedInterval];
+    
+    UITableViewCell *textCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:1]];
+    textCell.detailTextLabel.text = self.enteredText;
+
+    [self showTagColor];
+    
+    self.datePicker.date = self.selectedDate;
 }
 
 #pragma mark - RJRepeatIntevalProtocol

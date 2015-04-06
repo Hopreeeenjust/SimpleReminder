@@ -10,9 +10,16 @@
 #import "RJDataManager.h"
 #import "RJEventCell.h"
 #import "RJNewEventController.h"
+#import "RJEvent.h"
+#import "UIView+UITableViewCell.h"
+
+#define lightPurpleColor [UIColor colorWithRed:177.f/255 green:74.f/255 blue:255.f alpha:1.f]
+#define lightBlueColor [UIColor colorWithRed:63.f/255 green:168.f/255 blue:240.f/255 alpha:1.f]
 
 @interface RJEventsController ()
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+
+@property (strong, nonatomic) NSArray *tagColors;
 @end
 
 @implementation RJEventsController
@@ -28,10 +35,14 @@
     self.tabBarController.tabBar.tintColor = green;
     
     self.navigationItem.title = NSLocalizedString(@"Reminder", nil);
+    
+    self.tagColors = @[[UIColor redColor], [UIColor orangeColor], [UIColor yellowColor], [UIColor greenColor], lightBlueColor, lightPurpleColor, [UIColor lightGrayColor], [UIColor clearColor]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self.tableView setEditing:NO];
+    [self.tableView reloadData];
 }
 
 
@@ -41,11 +52,42 @@
 
 #pragma mark - Actions
 
-- (IBAction)actionAddEvent:(id)sender {
+- (IBAction)actionAddEvent:(UIBarButtonItem *)sender {
     RJNewEventController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"RJNewEventController"];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     vc.navigationItem.title = NSLocalizedString(@"New", nil);
+    vc.newEvent = YES;
     [self presentViewController:nav animated:YES completion:nil];
+}
+
+- (IBAction)actionEditButtonPushed:(UIBarButtonItem *)sender {
+    if (!self.tableView.isEditing) {
+        [self.tableView setEditing:YES animated:YES];
+//        [self.view setNeedsUpdateConstraints];
+//        RJEventCell *cell = (RJEventCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+//        cell.marginWidth.constant = -40.f;
+//        [UIView animateWithDuration:0.5
+//                         animations:^{
+//                             [self.view layoutIfNeeded];
+//                         }];
+    } else {
+        [self.tableView setEditing:NO animated:YES];
+//        [self.view setNeedsUpdateConstraints];
+//        RJEventCell *cell = (RJEventCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+//        cell.marginWidth.constant = 0.f;
+//        [UIView animateWithDuration:0.5
+//                         animations:^{
+//                             [self.view layoutIfNeeded];
+//                         }];
+    }
+}
+
+- (IBAction)actionSwitchValueChanged:(UISwitch *)sender {
+    RJEventCell *cell = (RJEventCell *)[sender superCell];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    RJEvent *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    event.isEnabled = [NSNumber numberWithBool:sender.isOn];
+    [[RJDataManager sharedManager] saveContext];
 }
 
 #pragma mark - NSFetchedResultsController
@@ -87,12 +129,27 @@
 #pragma mark - UITableViewDataSource
 
 - (void)configureCell:(RJEventCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 1) {
-        cell.tagView.backgroundColor = [UIColor redColor];
-        cell.eventTextLabel.text = @"Записаться к Оле на стрижку на четверг утро с пол первого до 10 и не забыть взять с собой зубную щетку с насадкой";
+    NSDateFormatter *timeFormatter = [NSDateFormatter new];
+    [timeFormatter setDateFormat:@"HH:mm"];
+    
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setDateFormat:@"dd.MM.yyyy"];
+    
+    RJEvent *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.eventTextLabel.text = event.text;
+    cell.timeLabel.text = [timeFormatter stringFromDate:event.date];
+    cell.dateLabel.text = [dateFormatter stringFromDate:event.date];
+    if ([event.isEnabled boolValue]) {
+        cell.enabledSwitch.on = YES;
     } else {
-        cell.tagView.backgroundColor = [UIColor clearColor];
-        cell.eventTextLabel.text = @"К зубному 03.04 в 16-30";
+        cell.enabledSwitch.on = NO;
+    }
+    if ([event.tag integerValue] != RJTagColorNone) {
+        UIColor *bgColor = [self.tagColors objectAtIndex:[event.tag integerValue]];
+        CALayer *layer = [CALayer layer];
+        layer.frame = cell.tagView.bounds;
+        layer.backgroundColor = bgColor.CGColor;
+        [cell.tagView.layer addSublayer:layer];
     }
 }
 
@@ -100,7 +157,9 @@
     static NSString *identifierUntagged = @"EventCell";
     static NSString *identifierTagged = @"EventCellTagged";
     NSString *identifier;
-    if (indexPath.row == 0) {
+    
+    RJEvent *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    if ([event.tag integerValue] == RJTagColorNone) {
         identifier = identifierUntagged;
     } else {
         identifier = identifierTagged;
@@ -109,6 +168,9 @@
     if (!cell) {
        cell = [[RJEventCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
     }
+    
+    cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
@@ -117,10 +179,35 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (tableView.isEditing) {
+        RJNewEventController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"RJNewEventController"];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+        vc.navigationItem.title = NSLocalizedString(@"Edit", nil);
+        
+        RJEvent *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        vc.selectedDate = event.date;
+        vc.selectedColor = [event.tag integerValue];
+        vc.enteredText = event.text;
+        vc.selectedInterval = [event.repeatInterval integerValue];
+        vc.newEvent = NO;
+        vc.currentEvent = event;
+        [self presentViewController:nav animated:YES completion:nil];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 1.f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 0.05f;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (tableView.isEditing) {
+        return UITableViewCellEditingStyleDelete;
+    }
+    return UITableViewCellEditingStyleNone;
 }
 
 @end

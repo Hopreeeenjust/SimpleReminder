@@ -23,6 +23,7 @@
 		E0768B971ACDDA17002D9A51 /* ClearColor@1X.png in Resources */ = {isa = PBXBuildFile; fileRef = E0768B941ACDDA17002D9A51 /* ClearColor@1X.png */; };
 		E0768B981ACDDA17002D9A51 /* ClearColor@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = E0768B951ACDDA17002D9A51 /* ClearColor@2X.png */; };
 		E0768B991ACDDA17002D9A51 /* ClearColor@3X.png in Resources */ = {isa = PBXBuildFile; fileRef = E0768B961ACDDA17002D9A51 /* ClearColor@3X.png */; };
+		E0C6795C1AD1B9830012F047 /* RJTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = E0C6795B1AD1B9830012F047 /* RJTableView.m */; };
 		E0C9EA4E1ACBE6F60008FB27 /* RJEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E0C9EA4D1ACBE6F60008FB27 /* RJEventCell.m */; };
 		E0C9EA541ACC21D10008FB27 /* RJEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = E0C9EA531ACC21D10008FB27 /* RJEvent.m */; };
 		E0C9EA581ACC22900008FB27 /* RJNewEventController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0C9EA571ACC22900008FB27 /* RJNewEventController.m */; };
@@ -66,6 +67,8 @@
 		E0768B941ACDDA17002D9A51 /* ClearColor@1X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ClearColor@1X.png"; sourceTree = "<group>"; };
 		E0768B951ACDDA17002D9A51 /* ClearColor@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ClearColor@2X.png"; sourceTree = "<group>"; };
 		E0768B961ACDDA17002D9A51 /* ClearColor@3X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ClearColor@3X.png"; sourceTree = "<group>"; };
+		E0C6795A1AD1B9830012F047 /* RJTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJTableView.h; sourceTree = "<group>"; };
+		E0C6795B1AD1B9830012F047 /* RJTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJTableView.m; sourceTree = "<group>"; };
 		E0C9EA4C1ACBE6F60008FB27 /* RJEventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJEventCell.h; sourceTree = "<group>"; };
 		E0C9EA4D1ACBE6F60008FB27 /* RJEventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJEventCell.m; sourceTree = "<group>"; };
 		E0C9EA521ACC21D10008FB27 /* RJEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJEvent.h; sourceTree = "<group>"; };
@@ -128,6 +131,7 @@
 				E04835D91ACAB03800BE745C /* Model Controllers */,
 				E0C9EA551ACC22610008FB27 /* Controllers */,
 				E0C9EA4B1ACBE6C50008FB27 /* CustomCells */,
+				E0C679591AD1B9130012F047 /* Custom tables */,
 				E04835A71ACA9A4200BE745C /* AppDelegate.h */,
 				E04835A81ACA9A4200BE745C /* AppDelegate.m */,
 				E04835B31ACA9A4200BE745C /* Main.storyboard */,
@@ -204,6 +208,15 @@
 			);
 			path = Images;
 			sourceTree = SOURCE_ROOT;
+		};
+		E0C679591AD1B9130012F047 /* Custom tables */ = {
+			isa = PBXGroup;
+			children = (
+				E0C6795A1AD1B9830012F047 /* RJTableView.h */,
+				E0C6795B1AD1B9830012F047 /* RJTableView.m */,
+			);
+			name = "Custom tables";
+			sourceTree = "<group>";
 		};
 		E0C9EA4B1ACBE6C50008FB27 /* CustomCells */ = {
 			isa = PBXGroup;
@@ -339,6 +352,7 @@
 				E04835AC1ACA9A4200BE745C /* SimpleReminder.xcdatamodeld in Sources */,
 				E04835D21ACA9B0400BE745C /* RJDataManager.m in Sources */,
 				E0C9EA581ACC22900008FB27 /* RJNewEventController.m in Sources */,
+				E0C6795C1AD1B9830012F047 /* RJTableView.m in Sources */,
 				E02044A11ACEC6870080A2B9 /* RJEventTextController.m in Sources */,
 				E0C9EA4E1ACBE6F60008FB27 /* RJEventCell.m in Sources */,
 				E04835D81ACAAD5400BE745C /* RJCoreDataTableViewController.m in Sources */,

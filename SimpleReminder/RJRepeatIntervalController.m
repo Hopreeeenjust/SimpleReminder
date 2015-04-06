@@ -19,7 +19,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIColor *green = [UIColor colorWithRed:67.f/255 green:213.f/255 blue:81.f/255 alpha:1.f];
+    self.navigationController.navigationBar.tintColor = green;
+    
     self.navigationItem.title = NSLocalizedString(@"Repeat", nil);
+    
+    [[UITableViewCell appearance] setTintColor:green];
     
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(actionSaveButtonPushed:)];
     self.navigationItem.rightBarButtonItem = saveButton;

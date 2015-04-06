@@ -11,5 +11,7 @@
 @interface RJEventsController : RJCoreDataTableViewController
 
 - (IBAction)actionAddEvent:(id)sender;
+- (IBAction)actionEditButtonPushed:(id)sender;
+- (IBAction)actionSwitchValueChanged:(id)sender;
 
 @end

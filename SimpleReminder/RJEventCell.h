@@ -14,4 +14,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *enabledSwitch;
 @property (weak, nonatomic) IBOutlet UIView *tagView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *marginWidth;
 @end
