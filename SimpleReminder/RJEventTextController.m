@@ -32,7 +32,7 @@
     [self setSettingsForTextView:textView];
     self.textView = textView;
     
-    [self addColorToUIKeyboardButton];
+//    [self addColorToUIKeyboardButton];
     
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(actionSaveButtonPushed:)];
     self.navigationItem.rightBarButtonItem = saveButton;
@@ -55,35 +55,35 @@
     [textView setReturnKeyType:UIReturnKeyDone];
 }
 
--(NSArray*)subviewsOfView:(UIView*)view withType:(NSString*)type{
-    NSString *prefix = [NSString stringWithFormat:@"<%@",type];
-    NSMutableArray *subviewArray = [NSMutableArray array];
-    for (UIView *subview in view.subviews) {
-        NSArray *tempArray = [self subviewsOfView:subview withType:type];
-        for (UIView *view in tempArray) {
-            [subviewArray addObject:view];
-        }
-    }
-    if ([[view description]hasPrefix:prefix]) {
-        [subviewArray addObject:view];
-    }
-    return [NSArray arrayWithArray:subviewArray];
-}
-
--(void)addColorToUIKeyboardButton{
-    for (UIWindow *keyboardWindow in [[UIApplication sharedApplication] windows]) {
-        for (UIView *keyboard in [keyboardWindow subviews]) {
-            for (UIView *view in [self subviewsOfView:keyboard withType:@"UIKBKeyplaneView"]) {
-                UIView *newView = [[UIView alloc] initWithFrame:[(UIView *)[[self subviewsOfView:keyboard withType:@"UIKBKeyView"] lastObject] frame]];
-                newView.frame = CGRectMake(newView.frame.origin.x + 2, newView.frame.origin.y + 1, newView.frame.size.width - 4, newView.frame.size.height -3);
-                [newView setBackgroundColor:[UIColor greenColor]];
-                newView.layer.cornerRadius = 4;
-                [view insertSubview:newView belowSubview:((UIView *)[[self subviewsOfView:keyboard withType:@"UIKBKeyView"] lastObject])];
-                
-            }
-        }
-    }
-}
+//-(NSArray*)subviewsOfView:(UIView*)view withType:(NSString*)type{
+//    NSString *prefix = [NSString stringWithFormat:@"<%@",type];
+//    NSMutableArray *subviewArray = [NSMutableArray array];
+//    for (UIView *subview in view.subviews) {
+//        NSArray *tempArray = [self subviewsOfView:subview withType:type];
+//        for (UIView *view in tempArray) {
+//            [subviewArray addObject:view];
+//        }
+//    }
+//    if ([[view description]hasPrefix:prefix]) {
+//        [subviewArray addObject:view];
+//    }
+//    return [NSArray arrayWithArray:subviewArray];
+//}
+//
+//-(void)addColorToUIKeyboardButton{
+//    for (UIWindow *keyboardWindow in [[UIApplication sharedApplication] windows]) {
+//        for (UIView *keyboard in [keyboardWindow subviews]) {
+//            for (UIView *view in [self subviewsOfView:keyboard withType:@"UIKBKeyplaneView"]) {
+//                UIView *newView = [[UIView alloc] initWithFrame:[(UIView *)[[self subviewsOfView:keyboard withType:@"UIKBKeyView"] lastObject] frame]];
+//                newView.frame = CGRectMake(newView.frame.origin.x + 2, newView.frame.origin.y + 1, newView.frame.size.width - 4, newView.frame.size.height -3);
+//                [newView setBackgroundColor:[UIColor greenColor]];
+//                newView.layer.cornerRadius = 4;
+//                [view insertSubview:newView belowSubview:((UIView *)[[self subviewsOfView:keyboard withType:@"UIKBKeyView"] lastObject])];
+//                
+//            }
+//        }
+//    }
+//}
 
 #pragma UITextViewDelegate
 

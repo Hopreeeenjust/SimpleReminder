@@ -13,15 +13,13 @@
 #import "RJEvent.h"
 #import "RJDataManager.h"
 
-#define lightPurpleColor [UIColor colorWithRed:177.f/255 green:74.f/255 blue:255.f alpha:1.f]
-#define lightBlueColor [UIColor colorWithRed:63.f/255 green:168.f/255 blue:240.f/255 alpha:1.f]
+#define customGreenColor [UIColor colorWithRed:67.f/255 green:213.f/255 blue:81.f/255 alpha:1.f]
 
 @interface RJNewEventController () <RJRepeatIntevalProtocol, RJEventTextProtocol>
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @property (assign, nonatomic) CGFloat currentRowHeight;
 @property (strong, nonatomic) NSArray *tagButtons;
-@property (strong, nonatomic) NSArray *tagColors;
 @end
 
 static const CGFloat kRowHeight = 44.f;
@@ -37,7 +35,6 @@ CGRect tagViewRect;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIColor *green = [UIColor colorWithRed:67.f/255 green:213.f/255 blue:81.f/255 alpha:1.f];
     
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(actionCancelButtonPushed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
@@ -45,7 +42,7 @@ CGRect tagViewRect;
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(actionSaveButtonPushed:)];
     self.navigationItem.rightBarButtonItem = saveButton;
     
-    self.navigationController.navigationBar.tintColor = green;
+    self.navigationController.navigationBar.tintColor = customGreenColor;
     
     self.datePicker.timeZone = [NSTimeZone localTimeZone];
     self.datePicker.backgroundColor = [UIColor whiteColor];
@@ -53,7 +50,6 @@ CGRect tagViewRect;
     self.currentRowHeight = kRowHeight;
     
     self.tagButtons = [NSArray new];
-    self.tagColors = @[[UIColor redColor], [UIColor orangeColor], [UIColor yellowColor], [UIColor greenColor], lightBlueColor, lightPurpleColor, [UIColor lightGrayColor], [UIColor clearColor]];
     
     viewDidAppear = NO;
     
@@ -64,6 +60,7 @@ CGRect tagViewRect;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.datePicker.minimumDate = [[NSDate alloc] initWithTimeIntervalSinceNow:60];
     if (!self.newEvent) {
         [self setEventSettings];
     }
@@ -155,13 +152,13 @@ CGRect tagViewRect;
 - (NSArray *)createButtonsForTags {
     CGFloat buttonWidth = 30.f;
     CGFloat buttonHeight = 30.f;
-    NSInteger buttonsCount = [self.tagColors count];
+    NSInteger buttonsCount = [[[RJDataManager sharedManager] tagColors] count];
     CGFloat inset = (CGRectGetWidth(self.tableView.frame) - buttonWidth * buttonsCount) / (buttonsCount + 1);
     CGFloat pointY = kRowHeight + kRowHeight / 2 - buttonHeight / 2;
     NSMutableArray *array = [NSMutableArray array];
     for (NSInteger i = RJTagColorRed; i <= RJTagColorNone; i++) {
         UIButton *tagButton = [[UIButton alloc] initWithFrame:CGRectIntegral(CGRectMake(inset * (i + 1) + buttonWidth * i, pointY, buttonWidth, buttonHeight))];
-        tagButton.backgroundColor = self.tagColors[i];
+        tagButton.backgroundColor = [[RJDataManager sharedManager] tagColors][i];
         tagButton.layer.cornerRadius = buttonHeight / 2;
         tagButton.clipsToBounds = YES;
         if (i == RJTagColorNone) {
@@ -233,7 +230,7 @@ CGRect tagViewRect;
     } else {
         self.tagLabel.textColor = [UIColor clearColor];
     }
-    self.tagView.backgroundColor = [self.tagColors objectAtIndex:self.selectedColor];
+    self.tagView.backgroundColor = [[[RJDataManager sharedManager] tagColors] objectAtIndex:self.selectedColor];
     
     if (viewDidAppear) {
         self.tagLabel.frame = tagLabelRect;
@@ -275,6 +272,7 @@ CGRect tagViewRect;
 }
 
 - (void)setDefaultSettings {
+    self.datePicker.date = [NSDate date];
     self.selectedInterval = 0;
     self.enteredText = @"Reminder";
     self.selectedColor = RJTagColorNone;

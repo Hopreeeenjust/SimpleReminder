@@ -13,13 +13,15 @@
 #import "RJEvent.h"
 #import "UIView+UITableViewCell.h"
 
-#define lightPurpleColor [UIColor colorWithRed:177.f/255 green:74.f/255 blue:255.f alpha:1.f]
-#define lightBlueColor [UIColor colorWithRed:63.f/255 green:168.f/255 blue:240.f/255 alpha:1.f]
+#define customGreenColor [UIColor colorWithRed:67.f/255 green:213.f/255 blue:81.f/255 alpha:1.f]
+
+#define NewEvents self.tabBarController.tabBar.selectedItem.tag == 0
+#define OldEvents self.tabBarController.tabBar.selectedItem.tag == 1
 
 @interface RJEventsController ()
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
-@property (strong, nonatomic) NSArray *tagColors;
+@property (strong, nonatomic) NSPredicate *predicate;
 @end
 
 @implementation RJEventsController
@@ -31,17 +33,33 @@
     [super viewDidLoad];
     self.tableView.contentInset = UIEdgeInsetsMake(-1.0f, 0.0f, 0.0f, 0.0f);     //to hide header in section 0
     
-    UIColor *green = [UIColor colorWithRed:67.f/255 green:213.f/255 blue:81.f/255 alpha:1.f];
-    self.tabBarController.tabBar.tintColor = green;
+    self.tabBarController.tabBar.tintColor = customGreenColor;
     
-    self.navigationItem.title = NSLocalizedString(@"Reminder", nil);
+    self.predicate = nil;
     
-    self.tagColors = @[[UIColor redColor], [UIColor orangeColor], [UIColor yellowColor], [UIColor greenColor], lightBlueColor, lightPurpleColor, [UIColor lightGrayColor], [UIColor clearColor]];
+    if (OldEvents) {
+        self.navigationItem.rightBarButtonItem.title = NSLocalizedString(@"Delete all", nil);
+        self.navigationItem.title = NSLocalizedString(@"Passed events", nil);
+    } else {
+        self.navigationItem.title = NSLocalizedString(@"Coming events", nil);
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+
+    self.fetchedResultsController = nil;
+    [self.tableView reloadData];
+    
+    if (OldEvents) {
+        [self setOldEventsDisabled];
+        [[RJDataManager sharedManager] saveContext];
+    }
+    
     [self.tableView setEditing:NO];
+    
+    [self checkButtonsAccessibility];
+    
     [self.tableView reloadData];
 }
 
@@ -90,6 +108,10 @@
     [[RJDataManager sharedManager] saveContext];
 }
 
+- (IBAction)actionDeleteAllEvents:(UIBarButtonItem *)sender {
+    [self showDeleteEventsAlert];
+}
+
 #pragma mark - NSFetchedResultsController
 
 - (NSFetchedResultsController *)fetchedResultsController
@@ -104,16 +126,19 @@
     
     [fetchRequest setFetchBatchSize:20];
     
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NewEvents];
     NSArray *sortDescriptors = @[sortDescriptor];
     
     [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    NSPredicate *predicate = [self choosePredicateForFetchRequest];
+    [fetchRequest setPredicate:predicate];
     
     NSFetchedResultsController *aFetchedResultsController =
     [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                         managedObjectContext:self.managedObjectContext
                                           sectionNameKeyPath:nil
-                                                   cacheName:@"Master"];
+                                                   cacheName:nil];
     aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
     
@@ -124,6 +149,13 @@
     }
     
     return _fetchedResultsController;
+}
+
+#pragma mark - NSFetchedResultsControllerDelegate
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [super controllerDidChangeContent:controller];
+    [self checkButtonsAccessibility];
 }
 
 #pragma mark - UITableViewDataSource
@@ -145,7 +177,7 @@
         cell.enabledSwitch.on = NO;
     }
     if ([event.tag integerValue] != RJTagColorNone) {
-        UIColor *bgColor = [self.tagColors objectAtIndex:[event.tag integerValue]];
+        UIColor *bgColor = [[[RJDataManager sharedManager] tagColors] objectAtIndex:[event.tag integerValue]];
         CALayer *layer = [CALayer layer];
         layer.frame = cell.tagView.bounds;
         layer.backgroundColor = bgColor.CGColor;
@@ -170,6 +202,12 @@
     }
     
     cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
+    if (OldEvents) {
+        cell.enabledSwitch.enabled = NO;
+    } else {
+        cell.enabledSwitch.enabled = YES;
+    }
     
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
@@ -208,6 +246,51 @@
         return UITableViewCellEditingStyleDelete;
     }
     return UITableViewCellEditingStyleNone;
+}
+
+#pragma mark - Methods
+
+- (NSPredicate *)choosePredicateForFetchRequest {
+    NSPredicate *predicate = nil;
+    if (NewEvents) {
+        predicate = [NSPredicate predicateWithFormat:@"date > %@", [NSDate date]];
+    } else if (OldEvents) {
+        predicate = [NSPredicate predicateWithFormat:@"date < %@", [NSDate date]];
+    }
+    return predicate;
+}
+
+- (void)setOldEventsDisabled {
+    NSArray *oldEventsArray = [self.fetchedResultsController fetchedObjects];
+    for (RJEvent *event in oldEventsArray) {
+        if ([event.isEnabled boolValue]) {
+            [event setIsEnabled:[NSNumber numberWithBool:NO]];
+        }
+    }
+}
+
+- (void)showDeleteEventsAlert {
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Attention", nil) message:NSLocalizedString(@"All past events will be deleted. Are you sure?", nil) preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *actionYes = [UIAlertAction actionWithTitle:NSLocalizedString(@"YES", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self deleteAllOldEvents];
+    }];
+    UIAlertAction *actionNo = [UIAlertAction actionWithTitle:NSLocalizedString(@"NO", nil) style:UIAlertActionStyleDefault handler:nil];
+    [ac addAction:actionYes];
+    [ac addAction:actionNo];
+    [self presentViewController:ac animated:YES completion:nil];
+}
+
+- (void)deleteAllOldEvents {
+    NSArray *oldEventsArray = [self.fetchedResultsController fetchedObjects];
+    for (RJEvent *event in oldEventsArray) {
+        [self.managedObjectContext deleteObject:event];
+    }
+    [[RJDataManager sharedManager] saveContext];
+}
+
+- (void)checkButtonsAccessibility {
+    self.editButton.enabled = [[self.fetchedResultsController fetchedObjects] count] != 0;
+    self.deleteAllButton.enabled = [[self.fetchedResultsController fetchedObjects] count] != 0;
 }
 
 @end

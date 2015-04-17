@@ -9,9 +9,10 @@
 #import "RJCoreDataTableViewController.h"
 
 @interface RJEventsController : RJCoreDataTableViewController
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *deleteAllButton;
 
 - (IBAction)actionAddEvent:(id)sender;
 - (IBAction)actionEditButtonPushed:(id)sender;
 - (IBAction)actionSwitchValueChanged:(id)sender;
-
 @end

@@ -7,6 +7,11 @@
 //
 
 #import "RJDataManager.h"
+#import <UIKit/UIKit.h>
+
+#define lightPurpleColor [UIColor colorWithRed:177.f/255 green:74.f/255 blue:255.f alpha:1.f]
+#define lightBlueColor [UIColor colorWithRed:63.f/255 green:168.f/255 blue:240.f/255 alpha:1.f]
+#define customGreenColor [UIColor colorWithRed:67.f/255 green:213.f/255 blue:81.f/255 alpha:1.f]
 
 @implementation RJDataManager
 
@@ -17,6 +22,15 @@
         manager = [RJDataManager new];
     });
     return manager;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.tagColors = @[[UIColor redColor], [UIColor orangeColor], [UIColor yellowColor], customGreenColor, lightBlueColor, lightPurpleColor, [UIColor lightGrayColor], [UIColor clearColor]];
+    }
+    return self;
 }
 
 #pragma mark - Core Data stack
