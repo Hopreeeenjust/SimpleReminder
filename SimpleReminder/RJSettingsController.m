@@ -28,8 +28,6 @@ static NSString *kSettingsSort = @"sort";
     [super viewDidLoad];
     self.navigationItem.title = NSLocalizedString(@"Settings", nil);
     
-    self.sortControl.selectedSegmentIndex = 0;
-    
     self.tagColors = [[RJDataManager sharedManager] tagColors];
     NSArray *colorsArray = [[NSUserDefaults standardUserDefaults] arrayForKey:kSettingsColors];
     if ([colorsArray count] == 0) {
@@ -41,7 +39,16 @@ static NSString *kSettingsSort = @"sort";
             [[self mutableArrayValueForKey:@"tagColors"] addObject:color];
         }
     }
+    
+    [self.tableView setEditing:YES];
+}
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self setPointersForControls];
+    
+    [self loadSettings];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,21 +70,29 @@ static NSString *kSettingsSort = @"sort";
 }
 
 - (void)configureCell:(RJSettingsCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    for (CALayer *sublayer in [cell.tagView.layer sublayers]) {
+        if ([sublayer isKindOfClass:[CALayer class]]) {
+            [sublayer removeFromSuperlayer];
+            break;
+        }
+    }
+    
     cell.deleteLabel.text = NSLocalizedString(@"Automaticly delete past events", nil);
     cell.sortLabel.text = NSLocalizedString(@"Sort events", nil);
     cell.tagView.layer.cornerRadius = 15.f;
     cell.tagView.clipsToBounds = YES;
     UIColor *bgColor = [self.tagColors objectAtIndex:indexPath.row];
-    CALayer *layer = [CALayer layer];
-    layer.frame = cell.tagView.bounds;
-    layer.backgroundColor = bgColor.CGColor;
+
     if ([bgColor isEqual:[UIColor clearColor]]) {
         cell.tagView.backgroundColor = bgColor;
         cell.tagLabel.text = NSLocalizedString(@"Without tag", nil);
     } else {
         cell.tagLabel.text = @"";
+        CALayer *layer = [CALayer layer];
+        layer.frame = cell.tagView.bounds;
+        layer.backgroundColor = bgColor.CGColor;
+        [cell.tagView.layer addSublayer:layer];
     }
-    [cell.tagView.layer addSublayer:layer];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -196,15 +211,16 @@ static NSString *kSettingsSort = @"sort";
     self.sortControl = sender;
     if (sender.selectedSegmentIndex == 0) {
         [self deleteSectionWithIndex:1];
-        [self.tableView setEditing:NO];
     } else {
         [self insertSectionWithIndex:1];
-        [self.tableView setEditing:YES];
     }
+    
+    [self saveSetting];
 }
 
 - (IBAction)actionDeleteCSwitchValueChanged:(UISwitch *)sender {
     self.deleteSwitch = sender;
+    [self saveSetting];
 }
 
 #pragma mark - Methods
@@ -224,11 +240,21 @@ static NSString *kSettingsSort = @"sort";
 }
 
 - (void)saveSetting {
-    
+    [[NSUserDefaults standardUserDefaults] setInteger:self.deleteSwitch.isOn forKey:kSettingsDelete];
+    [[NSUserDefaults standardUserDefaults] setInteger:self.sortControl.selectedSegmentIndex forKey:kSettingsSort];
 }
 
 - (void)loadSettings {
+    self.deleteSwitch.on = [[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDelete];
+    self.sortControl.selectedSegmentIndex = [[NSUserDefaults standardUserDefaults] integerForKey:kSettingsSort];
+}
+
+- (void)setPointersForControls {
+    RJSettingsCell *deleteCell = (RJSettingsCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    self.deleteSwitch = deleteCell.deleteControl;
     
+    RJSettingsCell *sortCell = (RJSettingsCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    self.sortControl = sortCell.sortControl;
 }
 
 @end

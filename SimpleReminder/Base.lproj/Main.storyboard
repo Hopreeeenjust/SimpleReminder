@@ -200,7 +200,7 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Cfx-m4-QdG" id="0Qz-XU-2cO">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17:40" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q2B-tA-je2">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17:40" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q2B-tA-je2">
                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="86" id="rUO-8R-DCM"/>
@@ -219,7 +219,7 @@
                                                 </mask>
                                             </variation>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="31.03.2015" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yay-PH-6o5">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="31.03.2015" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yay-PH-6o5">
                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="j4f-DI-6tU"/>
@@ -276,7 +276,7 @@
                                             <variation key="heightClass=regular-widthClass=compact" constant="2"/>
                                         </constraint>
                                         <constraint firstItem="aQ6-s4-0Zr" firstAttribute="leading" secondItem="Kde-Ly-jDj" secondAttribute="trailing" constant="33" id="d7Z-iX-YkC">
-                                            <variation key="heightClass=regular-widthClass=compact" constant="40"/>
+                                            <variation key="heightClass=regular-widthClass=compact" constant="35"/>
                                         </constraint>
                                         <constraint firstItem="Q2B-tA-je2" firstAttribute="leading" secondItem="0Qz-XU-2cO" secondAttribute="leadingMargin" constant="12" id="gUj-2O-4go">
                                             <variation key="heightClass=regular-widthClass=compact" constant="2"/>
@@ -291,7 +291,7 @@
                                             <variation key="heightClass=regular-widthClass=compact" constant="2"/>
                                         </constraint>
                                         <constraint firstItem="Kde-Ly-jDj" firstAttribute="leading" secondItem="0Qz-XU-2cO" secondAttribute="leadingMargin" constant="24" id="n59-Xl-9C5">
-                                            <variation key="heightClass=regular-widthClass=compact" constant="14"/>
+                                            <variation key="heightClass=regular-widthClass=compact" constant="19"/>
                                         </constraint>
                                         <constraint firstItem="aQ6-s4-0Zr" firstAttribute="top" secondItem="0Qz-XU-2cO" secondAttribute="topMargin" id="ovx-9X-v0K"/>
                                         <constraint firstItem="Yay-PH-6o5" firstAttribute="top" secondItem="Q2B-tA-je2" secondAttribute="bottom" constant="-5" id="qeM-SO-Oat"/>
@@ -408,7 +408,7 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3ha-vy-fLp" id="Z2V-Vz-hax">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17:40" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A9f-bd-Pdh">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17:40" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A9f-bd-Pdh">
                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="86" id="1od-w6-FtS"/>
@@ -427,7 +427,7 @@
                                                 </mask>
                                             </variation>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="31.03.2015" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZp-Dl-Icn">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="31.03.2015" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZp-Dl-Icn">
                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="86" id="pDO-hs-sdD"/>
@@ -480,11 +480,11 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="4rR-TX-bkP" firstAttribute="leading" secondItem="clV-5N-DyL" secondAttribute="trailing" constant="33" id="FxV-i2-2gY">
-                                            <variation key="heightClass=regular-widthClass=compact" constant="40"/>
+                                            <variation key="heightClass=regular-widthClass=compact" constant="35"/>
                                         </constraint>
                                         <constraint firstItem="4rR-TX-bkP" firstAttribute="top" secondItem="Z2V-Vz-hax" secondAttribute="topMargin" id="Gf4-fw-FBE"/>
                                         <constraint firstItem="clV-5N-DyL" firstAttribute="leading" secondItem="Z2V-Vz-hax" secondAttribute="leadingMargin" constant="24" id="Gl9-Xq-M6S">
-                                            <variation key="heightClass=regular-widthClass=compact" constant="14"/>
+                                            <variation key="heightClass=regular-widthClass=compact" constant="19"/>
                                         </constraint>
                                         <constraint firstItem="clV-5N-DyL" firstAttribute="top" secondItem="lZp-Dl-Icn" secondAttribute="bottom" constant="8" id="Hjf-Uu-8wF">
                                             <variation key="heightClass=regular-widthClass=compact" constant="2"/>

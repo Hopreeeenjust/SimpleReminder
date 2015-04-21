@@ -23,7 +23,9 @@
     
     self.navigationItem.title = NSLocalizedString(@"Text", nil);
     
-    CGRect rect = self.view.frame;
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    CGRect rect = CGRectMake(5, 0, CGRectGetWidth(self.view.bounds) - 5 * 2, CGRectGetHeight(self.view.bounds));
     UITextView *textView = [[UITextView alloc] initWithFrame:rect];
     [self.view addSubview:textView];
     textView.text = self.enteredText;

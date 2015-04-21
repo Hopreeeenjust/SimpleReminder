@@ -24,6 +24,12 @@
 @property (strong, nonatomic) NSPredicate *predicate;
 @end
 
+static NSString *kSettingsDelete = @"delete";
+static NSString *kSettingsSort = @"sort";
+
+BOOL deleteAll = NO;
+BOOL sortByTags = NO;
+
 @implementation RJEventsController
 @synthesize fetchedResultsController = _fetchedResultsController;
 
@@ -47,6 +53,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    deleteAll = [[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDelete];
+    sortByTags = [[NSUserDefaults standardUserDefaults] integerForKey:kSettingsSort];
 
     self.fetchedResultsController = nil;
     [self.tableView reloadData];
@@ -156,6 +165,14 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [super controllerDidChangeContent:controller];
     [self checkButtonsAccessibility];
+    if (deleteAll) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"date < %@", [NSDate date]];
+        
+        NSArray *oldEvents = [self getAllObjectsWithEntityName:@"RJEvent" predicate:predicate andSortDescriptors:@[]];
+        for (RJEvent *event in oldEvents) {
+            [self.managedObjectContext deleteObject:event];
+        }
+    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -291,6 +308,16 @@
 - (void)checkButtonsAccessibility {
     self.editButton.enabled = [[self.fetchedResultsController fetchedObjects] count] != 0;
     self.deleteAllButton.enabled = [[self.fetchedResultsController fetchedObjects] count] != 0;
+}
+
+- (NSArray *)getAllObjectsWithEntityName:(NSString *)entityName predicate:(NSPredicate *)predicate andSortDescriptors:(NSArray *)descriptors {
+    NSFetchRequest *request = [NSFetchRequest new];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:self.managedObjectContext];
+    [request setEntity:entity];
+    [request setPredicate:predicate];
+    [request setSortDescriptors:descriptors];
+    NSArray *resultArray = [self.managedObjectContext executeFetchRequest:request error:nil];
+    return resultArray;
 }
 
 @end
