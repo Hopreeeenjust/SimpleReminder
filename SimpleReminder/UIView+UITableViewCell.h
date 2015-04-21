@@ -10,4 +10,5 @@
 
 @interface UIView (UITableViewCell)
 - (UITableViewCell *)superCell;
+- (void)removeLayerWithName:(NSString *)name;
 @end

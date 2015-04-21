@@ -9,6 +9,7 @@
 #import "RJSettingsController.h"
 #import "RJSettingsCell.h"
 #import "RJDataManager.h"
+#import "UIView+UITableViewCell.h"
 
 @interface RJSettingsController ()
 @property (strong, nonatomic) UISegmentedControl *sortControl;
@@ -70,28 +71,25 @@ static NSString *kSettingsSort = @"sort";
 }
 
 - (void)configureCell:(RJSettingsCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    for (CALayer *sublayer in [cell.tagView.layer sublayers]) {
-        if ([sublayer isKindOfClass:[CALayer class]]) {
-            [sublayer removeFromSuperlayer];
-            break;
-        }
-    }
+    [cell.tagView removeLayerWithName:@"TagLayer"];
     
     cell.deleteLabel.text = NSLocalizedString(@"Automaticly delete past events", nil);
     cell.sortLabel.text = NSLocalizedString(@"Sort events", nil);
     cell.tagView.layer.cornerRadius = 15.f;
     cell.tagView.clipsToBounds = YES;
+    cell.tagView.backgroundColor = [UIColor clearColor];
     UIColor *bgColor = [self.tagColors objectAtIndex:indexPath.row];
-
+    
+    CALayer *layer = [CALayer layer];
+    layer.name = @"TagLayer";
+    layer.frame = cell.tagView.bounds;
+    layer.backgroundColor = bgColor.CGColor;
+    [cell.tagView.layer addSublayer:layer];
+    
     if ([bgColor isEqual:[UIColor clearColor]]) {
-        cell.tagView.backgroundColor = bgColor;
         cell.tagLabel.text = NSLocalizedString(@"Without tag", nil);
     } else {
         cell.tagLabel.text = @"";
-        CALayer *layer = [CALayer layer];
-        layer.frame = cell.tagView.bounds;
-        layer.backgroundColor = bgColor.CGColor;
-        [cell.tagView.layer addSublayer:layer];
     }
 }
 
@@ -113,6 +111,7 @@ static NSString *kSettingsSort = @"sort";
     if (!cell) {
         cell = [[RJSettingsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
+    
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }

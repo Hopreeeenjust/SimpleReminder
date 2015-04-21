@@ -14,6 +14,8 @@
 #import "UIView+UITableViewCell.h"
 
 #define customGreenColor [UIColor colorWithRed:67.f/255 green:213.f/255 blue:81.f/255 alpha:1.f]
+#define lightPurpleColor [UIColor colorWithRed:177.f/255 green:74.f/255 blue:255.f alpha:1.f]
+#define lightBlueColor [UIColor colorWithRed:63.f/255 green:168.f/255 blue:240.f/255 alpha:1.f]
 
 #define NewEvents self.tabBarController.tabBar.selectedItem.tag == 0
 #define OldEvents self.tabBarController.tabBar.selectedItem.tag == 1
@@ -26,6 +28,7 @@
 
 static NSString *kSettingsDelete = @"delete";
 static NSString *kSettingsSort = @"sort";
+static NSString *kSettingsColors = @"colors";
 
 BOOL deleteAll = NO;
 BOOL sortByTags = NO;
@@ -135,8 +138,9 @@ BOOL sortByTags = NO;
     
     [fetchRequest setFetchBatchSize:20];
     
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NewEvents];
-    NSArray *sortDescriptors = @[sortDescriptor];
+    NSSortDescriptor *dateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NewEvents];
+    
+    NSArray *sortDescriptors = @[dateDescriptor];;
     
     [fetchRequest setSortDescriptors:sortDescriptors];
     
@@ -184,7 +188,7 @@ BOOL sortByTags = NO;
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     [dateFormatter setDateFormat:@"dd.MM.yyyy"];
     
-    RJEvent *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    RJEvent *event = [self eventAccordingToSortingSettingsAtIndexPath:indexPath];
     cell.eventTextLabel.text = event.text;
     cell.timeLabel.text = [timeFormatter stringFromDate:event.date];
     cell.dateLabel.text = [dateFormatter stringFromDate:event.date];
@@ -193,9 +197,12 @@ BOOL sortByTags = NO;
     } else {
         cell.enabledSwitch.on = NO;
     }
+    
     if ([event.tag integerValue] != RJTagColorNone) {
+        [cell.tagView removeLayerWithName:@"TagLayer"];
         UIColor *bgColor = [[[RJDataManager sharedManager] tagColors] objectAtIndex:[event.tag integerValue]];
         CALayer *layer = [CALayer layer];
+        layer.name = @"TagLayer";
         layer.frame = cell.tagView.bounds;
         layer.backgroundColor = bgColor.CGColor;
         [cell.tagView.layer addSublayer:layer];
@@ -207,7 +214,8 @@ BOOL sortByTags = NO;
     static NSString *identifierTagged = @"EventCellTagged";
     NSString *identifier;
     
-    RJEvent *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    RJEvent *event = [self eventAccordingToSortingSettingsAtIndexPath:indexPath];
+    
     if ([event.tag integerValue] == RJTagColorNone) {
         identifier = identifierUntagged;
     } else {
@@ -318,6 +326,70 @@ BOOL sortByTags = NO;
     [request setSortDescriptors:descriptors];
     NSArray *resultArray = [self.managedObjectContext executeFetchRequest:request error:nil];
     return resultArray;
+}
+
+- (NSArray *)tagValuesArrayFromTagColorsArray:(NSArray *)tagColorsArray {
+    NSMutableArray *temp = [NSMutableArray array];
+    for (UIColor *tagColor in tagColorsArray) {
+        NSInteger tagValue = [self tagValueFromTagColor:tagColor];
+        [temp addObject:@(tagValue)];
+    }
+    return [NSArray arrayWithArray:temp];
+}
+
+- (NSInteger)tagValueFromTagColor:(UIColor *)tagColor {
+    if ([tagColor isEqual:[UIColor redColor]]) {
+        return RJTagColorRed;
+    } else if ([tagColor isEqual:[UIColor orangeColor]]) {
+        return RJTagColorOrange;
+    } else if ([tagColor isEqual:[UIColor yellowColor]]) {
+        return RJTagColorYellow;
+    } else if ([tagColor isEqual:customGreenColor]) {
+        return RJTagColorGreen;
+    } else if ([tagColor isEqual:lightBlueColor]) {
+        return RJTagColorBlue;
+    } else if ([tagColor isEqual:lightPurpleColor]) {
+        return RJTagColorPurple;
+    } else if ([tagColor isEqual:[UIColor lightGrayColor]]) {
+        return RJTagColorGray;
+    } else {
+        return RJTagColorNone;
+    }
+}
+
+- (NSArray *)arraySortedByTagsFromArray:(NSArray *)array {
+    
+    NSArray *colorsArray = [[NSUserDefaults standardUserDefaults] arrayForKey:kSettingsColors];
+    
+    NSMutableArray *temp = [NSMutableArray array];
+    for (NSData *colorData in colorsArray) {
+        UIColor *color = [NSKeyedUnarchiver unarchiveObjectWithData:colorData];
+        [temp addObject:color];
+    }
+    
+    NSArray *tagsArray = [self tagValuesArrayFromTagColorsArray:[NSArray arrayWithArray:temp]];
+    
+    NSArray *sorted = [array sortedArrayUsingComparator:^NSComparisonResult(RJEvent *obj1, RJEvent *obj2) {
+        NSNumber *tag1 = obj1.tag;
+        NSNumber *tag2 = obj2.tag;
+        
+        NSInteger idx1 = [tagsArray indexOfObject:tag1];
+        NSInteger idx2 = [tagsArray indexOfObject:tag2];
+        return [@(idx1) compare:@(idx2)];
+    }];
+    
+    return sorted;
+}
+
+- (RJEvent *)eventAccordingToSortingSettingsAtIndexPath:(NSIndexPath *)indexPath {
+    RJEvent *event = nil;
+    if (sortByTags && NewEvents) {
+        NSArray *sortedEventsArray = [self arraySortedByTagsFromArray:[self.fetchedResultsController fetchedObjects]];
+        event = [sortedEventsArray objectAtIndex:indexPath.row];
+    } else {
+        event = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    }
+    return event;
 }
 
 @end

@@ -9,6 +9,7 @@
 #import "UIView+UITableViewCell.h"
 
 @implementation UIView (UITableViewCell)
+
 - (UITableViewCell *)superCell {
     if (!self.superview) {
         return nil;
@@ -18,4 +19,14 @@
     }
     return [self.superview superCell];
 }
+
+- (void)removeLayerWithName:(NSString *)name {
+    NSArray* sublayers = [NSArray arrayWithArray:self.layer.sublayers];
+    for (CALayer *layer in sublayers) {
+        if ([layer.name isEqualToString:name]) {
+            [layer removeFromSuperlayer];
+        }
+    }
+}
+
 @end
