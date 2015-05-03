@@ -8,14 +8,17 @@
 
 #import "RJNewEventController.h"
 #import "UIView+UITableViewCell.h"
-#import "RJRepeatIntervalController.h"
+#import "RJPreviousIntervalController.h"
 #import "RJEventTextController.h"
 #import "RJEvent.h"
 #import "RJDataManager.h"
+#import "RJVolumeController.h"
 
 #define customGreenColor [UIColor colorWithRed:67.f/255 green:213.f/255 blue:81.f/255 alpha:1.f]
 
-@interface RJNewEventController () <RJRepeatIntevalProtocol, RJEventTextProtocol>
+static const NSString *kEventKey = @"EventKey";
+
+@interface RJNewEventController () <RJPreviousIntevalProtocol, RJEventTextProtocol>
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @property (assign, nonatomic) CGFloat currentRowHeight;
@@ -102,11 +105,14 @@ CGRect tagViewRect;
         event = self.currentEvent;
     }
     event.tag = [NSNumber numberWithInteger:self.selectedColor];
-    event.repeatInterval = [NSNumber numberWithInteger:self.selectedInterval];
+    event.previousInterval = [NSNumber numberWithInteger:self.selectedInterval];
     event.text = self.enteredText;
     event.isEnabled = [NSNumber numberWithBool:YES];
     event.date = self.datePicker.date;
     [[RJDataManager sharedManager] saveContext];
+    
+    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+    [self scheduleLocalNotification:localNotif forEvent:event onDate:event.date withText:event.text];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -123,11 +129,14 @@ CGRect tagViewRect;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 0) {
-
+        RJVolumeController *vc = [[RJVolumeController alloc] initWithStyle:UITableViewStyleGrouped];
+//        vc.delegate = self;
+//        vc.selectedSoundID = self.selectedSoundID;
+        [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.row == 1) {
         [self tableView:tableView doubleRowHeightAndShowTagsForRowAtIndexPath:indexPath];
     } else if (indexPath.row == 2) {
-        RJRepeatIntervalController *vc = [[RJRepeatIntervalController alloc] initWithStyle:UITableViewStyleGrouped];
+        RJPreviousIntervalController *vc = [[RJPreviousIntervalController alloc] initWithStyle:UITableViewStyleGrouped];
         vc.delegate = self;
         vc.selectedInterval = self.selectedInterval;
         [self.navigationController pushViewController:vc animated:YES];
@@ -292,7 +301,7 @@ CGRect tagViewRect;
 
 #pragma mark - RJRepeatIntevalProtocol
 
-- (void)repeatIntervalForReminder:(NSTimeInterval)interval {
+- (void)previousIntervalForReminder:(NSTimeInterval)interval {
     self.selectedInterval = interval;
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:1]];
     cell.detailTextLabel.text = [self showSelectedInterval];
@@ -304,6 +313,24 @@ CGRect tagViewRect;
     self.enteredText = text;
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:1]];
     cell.detailTextLabel.text = text;
+}
+
+- (void)scheduleLocalNotification:(UILocalNotification *)localNotif forEvent:(RJEvent *)event onDate:(NSDate *)date withText:(NSString *)text {
+    if (localNotif == nil)
+        return;
+    localNotif.fireDate = date;
+    localNotif.timeZone = [NSTimeZone defaultTimeZone];
+    
+    localNotif.alertBody = text;
+    localNotif.alertAction = NSLocalizedString(@"OK", nil);
+    
+    localNotif.soundName = UILocalNotificationDefaultSoundName;
+    localNotif.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
+    
+//    NSDictionary *infoDict = [NSDictionary dictionaryWithObject:event forKey:kEventKey];
+//    localNotif.userInfo = infoDict;
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
 }
 
 

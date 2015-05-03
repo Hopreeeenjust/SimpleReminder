@@ -17,7 +17,17 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    [self registerApplicationNotificationSettings];
+    
+    UILocalNotification *localNotif =
+    [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if (localNotif) {
+        application.applicationIconBadgeNumber = 0;
+    }
+    
+    
+    
     return YES;
 }
 
@@ -43,6 +53,41 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
     [[RJDataManager sharedManager] saveContext];
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    application.applicationIconBadgeNumber = 0;
+
+    [self showAlertForLocalNotification:notification];
+}
+
+#pragma mark - Methods 
+
+- (void)registerApplicationNotificationSettings {
+    UIUserNotificationType types = UIUserNotificationTypeBadge |
+    UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+    
+    UIUserNotificationSettings *mySettings =
+    [UIUserNotificationSettings settingsForTypes:types categories:nil];
+    
+    [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
+}
+
+- (void)showAlertForLocalNotification:(UILocalNotification *)notification {
+    if (IOS8) {
+        UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Simple Reminder" message:notification.alertBody preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:nil];
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        [ac addAction:actionCancel];
+        [ac addAction:actionOk];
+        [self.window.rootViewController presentViewController:ac animated:YES completion:nil];
+    } else if (IOS7) {
+        [[[UIAlertView alloc] initWithTitle:@"Simple Reminder"
+                                    message:notification.alertBody
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
+    }
 }
 
 @end

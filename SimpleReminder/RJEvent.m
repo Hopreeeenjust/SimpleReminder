@@ -15,6 +15,6 @@
 @dynamic isEnabled;
 @dynamic tag;
 @dynamic text;
-@dynamic repeatInterval;
+@dynamic previousInterval;
 
 @end

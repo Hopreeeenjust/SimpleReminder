@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+#define IOS8 ([[[UIDevice currentDevice] systemVersion] hasPrefix:@"8"])
+#define IOS7 ([[[UIDevice currentDevice] systemVersion] hasPrefix:@"7"])
+
 @interface RJDataManager : NSObject
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;

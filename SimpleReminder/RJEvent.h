@@ -16,6 +16,6 @@
 @property (nonatomic, retain) NSNumber * isEnabled;
 @property (nonatomic, retain) NSNumber * tag;
 @property (nonatomic, retain) NSString * text;
-@property (nonatomic, retain) NSNumber * repeatInterval;
+@property (nonatomic, retain) NSNumber * previousInterval;
 
 @end

@@ -115,7 +115,7 @@ BOOL sortByTags = NO;
 - (IBAction)actionSwitchValueChanged:(UISwitch *)sender {
     RJEventCell *cell = (RJEventCell *)[sender superCell];
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    RJEvent *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    RJEvent *event = [self eventAccordingToSortingSettingsAtIndexPath:indexPath];
     event.isEnabled = [NSNumber numberWithBool:sender.isOn];
     [[RJDataManager sharedManager] saveContext];
 }
@@ -236,6 +236,9 @@ BOOL sortByTags = NO;
     
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
+    
+//    UILocalNotification *ll = nil;
+//    [[UIApplication sharedApplication] scheduleLocalNotification:ll];
 }
 
 #pragma mark - UITableViewDelegate
@@ -247,11 +250,11 @@ BOOL sortByTags = NO;
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
         vc.navigationItem.title = NSLocalizedString(@"Edit", nil);
         
-        RJEvent *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        RJEvent *event = [self eventAccordingToSortingSettingsAtIndexPath:indexPath];
         vc.selectedDate = event.date;
         vc.selectedColor = [event.tag integerValue];
         vc.enteredText = event.text;
-        vc.selectedInterval = [event.repeatInterval integerValue];
+        vc.selectedInterval = [event.previousInterval integerValue];
         vc.newEvent = NO;
         vc.currentEvent = event;
         [self presentViewController:nav animated:YES completion:nil];

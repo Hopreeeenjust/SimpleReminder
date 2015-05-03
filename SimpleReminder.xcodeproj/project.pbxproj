@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E020449B1ACE934A0080A2B9 /* UIView+UITableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E020449A1ACE934A0080A2B9 /* UIView+UITableViewCell.m */; };
-		E020449E1ACE96480080A2B9 /* RJRepeatIntervalController.m in Sources */ = {isa = PBXBuildFile; fileRef = E020449D1ACE96480080A2B9 /* RJRepeatIntervalController.m */; };
+		E020449E1ACE96480080A2B9 /* RJPreviousIntervalController.m in Sources */ = {isa = PBXBuildFile; fileRef = E020449D1ACE96480080A2B9 /* RJPreviousIntervalController.m */; };
 		E02044A11ACEC6870080A2B9 /* RJEventTextController.m in Sources */ = {isa = PBXBuildFile; fileRef = E02044A01ACEC6870080A2B9 /* RJEventTextController.m */; };
 		E04835A61ACA9A4200BE745C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E04835A51ACA9A4200BE745C /* main.m */; };
 		E04835A91ACA9A4200BE745C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E04835A81ACA9A4200BE745C /* AppDelegate.m */; };
@@ -20,6 +20,7 @@
 		E04835D21ACA9B0400BE745C /* RJDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E04835D11ACA9B0400BE745C /* RJDataManager.m */; };
 		E04835D51ACAACC800BE745C /* RJEventsController.m in Sources */ = {isa = PBXBuildFile; fileRef = E04835D41ACAACC800BE745C /* RJEventsController.m */; };
 		E04835D81ACAAD5400BE745C /* RJCoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E04835D71ACAAD5400BE745C /* RJCoreDataTableViewController.m */; };
+		E063CE9E1AE7AF2800DC9AD4 /* RJVolumeController.m in Sources */ = {isa = PBXBuildFile; fileRef = E063CE9D1AE7AF2800DC9AD4 /* RJVolumeController.m */; };
 		E06507C81ADF9EC100FC6B76 /* RJSettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E06507C71ADF9EC100FC6B76 /* RJSettingsCell.m */; };
 		E0768B971ACDDA17002D9A51 /* ClearColor@1X.png in Resources */ = {isa = PBXBuildFile; fileRef = E0768B941ACDDA17002D9A51 /* ClearColor@1X.png */; };
 		E0768B981ACDDA17002D9A51 /* ClearColor@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = E0768B951ACDDA17002D9A51 /* ClearColor@2X.png */; };
@@ -44,8 +45,8 @@
 /* Begin PBXFileReference section */
 		E02044991ACE934A0080A2B9 /* UIView+UITableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+UITableViewCell.h"; sourceTree = "<group>"; };
 		E020449A1ACE934A0080A2B9 /* UIView+UITableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+UITableViewCell.m"; sourceTree = "<group>"; };
-		E020449C1ACE96480080A2B9 /* RJRepeatIntervalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJRepeatIntervalController.h; sourceTree = "<group>"; };
-		E020449D1ACE96480080A2B9 /* RJRepeatIntervalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJRepeatIntervalController.m; sourceTree = "<group>"; };
+		E020449C1ACE96480080A2B9 /* RJPreviousIntervalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJPreviousIntervalController.h; sourceTree = "<group>"; };
+		E020449D1ACE96480080A2B9 /* RJPreviousIntervalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJPreviousIntervalController.m; sourceTree = "<group>"; };
 		E020449F1ACEC6870080A2B9 /* RJEventTextController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJEventTextController.h; sourceTree = "<group>"; };
 		E02044A01ACEC6870080A2B9 /* RJEventTextController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJEventTextController.m; sourceTree = "<group>"; };
 		E04835A01ACA9A4200BE745C /* SimpleReminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleReminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,6 +67,8 @@
 		E04835D41ACAACC800BE745C /* RJEventsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJEventsController.m; sourceTree = "<group>"; };
 		E04835D61ACAAD5400BE745C /* RJCoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJCoreDataTableViewController.h; sourceTree = "<group>"; };
 		E04835D71ACAAD5400BE745C /* RJCoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJCoreDataTableViewController.m; sourceTree = "<group>"; };
+		E063CE9C1AE7AF2800DC9AD4 /* RJVolumeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJVolumeController.h; sourceTree = "<group>"; };
+		E063CE9D1AE7AF2800DC9AD4 /* RJVolumeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJVolumeController.m; sourceTree = "<group>"; };
 		E06507C61ADF9EC100FC6B76 /* RJSettingsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJSettingsCell.h; sourceTree = "<group>"; };
 		E06507C71ADF9EC100FC6B76 /* RJSettingsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJSettingsCell.m; sourceTree = "<group>"; };
 		E0768B941ACDDA17002D9A51 /* ClearColor@1X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ClearColor@1X.png"; sourceTree = "<group>"; };
@@ -238,14 +241,16 @@
 		E0C9EA551ACC22610008FB27 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				E020449C1ACE96480080A2B9 /* RJRepeatIntervalController.h */,
-				E020449D1ACE96480080A2B9 /* RJRepeatIntervalController.m */,
+				E020449C1ACE96480080A2B9 /* RJPreviousIntervalController.h */,
+				E020449D1ACE96480080A2B9 /* RJPreviousIntervalController.m */,
 				E020449F1ACEC6870080A2B9 /* RJEventTextController.h */,
 				E02044A01ACEC6870080A2B9 /* RJEventTextController.m */,
 				E0C9EA561ACC22900008FB27 /* RJNewEventController.h */,
 				E0C9EA571ACC22900008FB27 /* RJNewEventController.m */,
 				E0B3ED571ADE9F6000F978F1 /* RJSettingsController.h */,
 				E0B3ED581ADE9F6000F978F1 /* RJSettingsController.m */,
+				E063CE9C1AE7AF2800DC9AD4 /* RJVolumeController.h */,
+				E063CE9D1AE7AF2800DC9AD4 /* RJVolumeController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -299,6 +304,7 @@
 				TargetAttributes = {
 					E048359F1ACA9A4200BE745C = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = V7J95Y9ZSS;
 					};
 					E04835BE1ACA9A4200BE745C = {
 						CreatedOnToolsVersion = 6.2;
@@ -356,10 +362,11 @@
 				E06507C81ADF9EC100FC6B76 /* RJSettingsCell.m in Sources */,
 				E04835D51ACAACC800BE745C /* RJEventsController.m in Sources */,
 				E04835A91ACA9A4200BE745C /* AppDelegate.m in Sources */,
-				E020449E1ACE96480080A2B9 /* RJRepeatIntervalController.m in Sources */,
+				E020449E1ACE96480080A2B9 /* RJPreviousIntervalController.m in Sources */,
 				E0C9EA541ACC21D10008FB27 /* RJEvent.m in Sources */,
 				E04835A61ACA9A4200BE745C /* main.m in Sources */,
 				E0B3ED591ADE9F6000F978F1 /* RJSettingsController.m in Sources */,
+				E063CE9E1AE7AF2800DC9AD4 /* RJVolumeController.m in Sources */,
 				E020449B1ACE934A0080A2B9 /* UIView+UITableViewCell.m in Sources */,
 				E04835AC1ACA9A4200BE745C /* SimpleReminder.xcdatamodeld in Sources */,
 				E04835D21ACA9B0400BE745C /* RJDataManager.m in Sources */,
@@ -489,9 +496,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SimpleReminder/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -499,9 +510,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SimpleReminder/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

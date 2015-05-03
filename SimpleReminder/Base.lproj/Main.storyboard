@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="afN-rh-pV2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="afN-rh-pV2">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -401,7 +402,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" allowsSelectionDuringEditing="YES" rowHeight="111" sectionHeaderHeight="1" sectionFooterHeight="1" id="Klu-Ph-fhG" customClass="RJTableView">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventCell" rowHeight="111" id="3ha-vy-fLp" customClass="RJEventCell">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -866,7 +867,7 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="k5y-Hi-Gj7" firstAttribute="leading" secondItem="TVq-uC-W6a" secondAttribute="leadingMargin" constant="7" id="1wz-RF-ldw"/>
+                                                <constraint firstItem="k5y-Hi-Gj7" firstAttribute="leading" secondItem="TVq-uC-W6a" secondAttribute="leading" constant="15" id="KfZ-Tt-T7g"/>
                                                 <constraint firstItem="gYE-Cf-hAr" firstAttribute="top" secondItem="TVq-uC-W6a" secondAttribute="topMargin" constant="3" id="Wr6-Ky-by8"/>
                                                 <constraint firstItem="k5y-Hi-Gj7" firstAttribute="top" secondItem="TVq-uC-W6a" secondAttribute="topMargin" constant="4" id="cR2-IO-1wM"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="gYE-Cf-hAr" secondAttribute="trailing" constant="-8" id="hpw-OF-5iP"/>
@@ -882,7 +883,7 @@
                                                 <mask key="constraints">
                                                     <exclude reference="Wr6-Ky-by8"/>
                                                     <exclude reference="hpw-OF-5iP"/>
-                                                    <exclude reference="1wz-RF-ldw"/>
+                                                    <exclude reference="KfZ-Tt-T7g"/>
                                                     <exclude reference="cR2-IO-1wM"/>
                                                     <exclude reference="uUo-f7-87d"/>
                                                     <exclude reference="wmw-r1-VWH"/>
@@ -897,7 +898,7 @@
                                                 <mask key="constraints">
                                                     <include reference="Wr6-Ky-by8"/>
                                                     <include reference="hpw-OF-5iP"/>
-                                                    <include reference="1wz-RF-ldw"/>
+                                                    <include reference="KfZ-Tt-T7g"/>
                                                     <include reference="cR2-IO-1wM"/>
                                                     <include reference="uUo-f7-87d"/>
                                                     <include reference="wmw-r1-VWH"/>
@@ -1000,7 +1001,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="CbB-ld-Yi1">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DeleteCell" id="Awm-HS-OpG" customClass="RJSettingsCell">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -1010,7 +1011,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Automaticly delete past events" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="ynD-Lx-qGi">
                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Img-az-BO2">
@@ -1073,7 +1074,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort events" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g06-HU-e98">
                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="WLV-6P-BgK">
@@ -1157,7 +1158,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Without tag" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAb-O1-wM7">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
