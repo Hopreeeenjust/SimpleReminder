@@ -22,7 +22,7 @@
     UIColor *green = [UIColor colorWithRed:67.f/255 green:213.f/255 blue:81.f/255 alpha:1.f];
     self.navigationController.navigationBar.tintColor = green;
     
-    self.navigationItem.title = NSLocalizedString(@"Repeat", nil);
+    self.navigationItem.title = NSLocalizedString(@"Notify", nil);
     
     [[UITableViewCell appearance] setTintColor:green];
     
@@ -49,19 +49,19 @@
     }
     
     if (indexPath.row == 0) {
-        cell.textLabel.text = NSLocalizedString(@"Don't repeat", nil);
+        cell.textLabel.text = NSLocalizedString(@"Don't notify", nil);
     } else if (indexPath.row == 1) {
-        cell.textLabel.text = NSLocalizedString(@"In a minute", nil);
+        cell.textLabel.text = NSLocalizedString(@"A minute before", nil);
     } else if (indexPath.row == 2) {
-        cell.textLabel.text = NSLocalizedString(@"In 2 minuties", nil);
+        cell.textLabel.text = NSLocalizedString(@"Five minutes before", nil);
     } else if (indexPath.row == 3) {
-        cell.textLabel.text = NSLocalizedString(@"In 3 minuties", nil);
+        cell.textLabel.text = NSLocalizedString(@"Ten minutes before", nil);
     } else if (indexPath.row == 4) {
-        cell.textLabel.text = NSLocalizedString(@"In 5 minuties", nil);
+        cell.textLabel.text = NSLocalizedString(@"Twenty minutes before", nil);
     } else if (indexPath.row == 5) {
-        cell.textLabel.text = NSLocalizedString(@"In 10 minuties", nil);
+        cell.textLabel.text = NSLocalizedString(@"Half an hour before", nil);
     } else {
-        cell.textLabel.text = NSLocalizedString(@"In 15 minuties", nil);
+        cell.textLabel.text = NSLocalizedString(@"An hour before", nil);
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 }

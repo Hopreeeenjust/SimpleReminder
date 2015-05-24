@@ -1,0 +1,47 @@
+/* 
+  Localizable.strings
+  SimpleReminder
+
+  Created by Hopreeeeenjust on 24.05.15.
+  Copyright (c) 2015 Hopreeeeenjust. All rights reserved.
+*/
+
+"delete.all" = "Удалить все";
+"Passed events" = "Прошедшие события";
+"Coming events" = "Предстоящие события";
+"New" = "Новое";
+"Edit" = "Редактировать";
+"Attention" = "Внимание";
+"All past events will be deleted. Are you sure?" = "Все прошедшие события будут удалены. Вы уверены, что хотите продолжить?";
+"YES" = "ДА";
+"NO" = "НЕТ";
+"Text" = "Текст";
+"Don't notify" = "Не напоминать";
+"A minute before" = "За минуту";
+"Five minutes before" = "За пять минут";
+"Ten minutes before" = "За десять минут";
+"Twenty minutes before" = "За двадцать минут";
+"Half an hour before" = "За пол часа";
+"An hour before" = "За один час";
+"No tag" = "Без тега";
+"OK" = "ОК";
+"Reminder" = "Напоминание";
+"Notify" = "Напомнить";
+"Settings" = "Настройки";
+"Automaticly delete past events" = "Автоматически удалять прошедшие события";
+"Sort events" = "Сортировать события";
+"Without tag" = "Без тега";
+"Choose the order you want your events to display" = "Выберите порядок, в котором Вы хотите, чтобы Ваши события отображались";
+"Done" = "Готово";
+
+
+
+
+
+
+
+
+
+
+
+

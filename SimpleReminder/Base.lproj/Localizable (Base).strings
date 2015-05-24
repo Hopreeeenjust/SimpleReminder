@@ -1,0 +1,47 @@
+/* 
+  Localizable.strings
+  SimpleReminder
+
+  Created by Hopreeeeenjust on 24.05.15.
+  Copyright (c) 2015 Hopreeeeenjust. All rights reserved.
+*/
+
+"delete.all" = "Delete all";
+"Passed events" = "Passed events";
+"Coming events" = "Coming events";
+"New" = "New";
+"Edit" = "Edit";
+"Attention" = "Attention";
+"All past events will be deleted. Are you sure?" = "All past events will be deleted. Are you sure?";
+"YES" = "YES";
+"NO" = "NO";
+"Text" = "Text";
+"Don't notify" = "Don't notify";
+"A minute before" = "A minute before";
+"Five minutes before" = "Five minutes before";
+"Ten minutes before" = "Ten minutes before";
+"Twenty minutes before" = "Twenty minutes before";
+"Half an hour before" = "Half an hour before";
+"An hour before" = "An hour before";
+"No tag" = "No tag";
+"OK" = "OK";
+"Reminder" = "Reminder";
+"Notify" = "Notify";
+"Settings" = "Settings";
+"Automaticly delete past events" = "Automaticly delete past events";
+"Sort events" = "Sort events";
+"Without tag" = "Without tag";
+"Choose the order you want your events to display" = "Choose the order you want your events to display";
+"Done" = "Done";
+
+
+
+
+
+
+
+
+
+
+
+

@@ -47,7 +47,7 @@ BOOL sortByTags = NO;
     self.predicate = nil;
     
     if (OldEvents) {
-        self.navigationItem.rightBarButtonItem.title = NSLocalizedString(@"Delete all", nil);
+        self.navigationItem.rightBarButtonItem.title = NSLocalizedString(@"delete.all", nil);
         self.navigationItem.title = NSLocalizedString(@"Passed events", nil);
     } else {
         self.navigationItem.title = NSLocalizedString(@"Coming events", nil);

@@ -212,23 +212,23 @@ CGRect tagViewRect;
 }
 
 - (NSString *)showSelectedInterval {
-    NSArray *array = @[@0, @(1 * 60), @(2 * 60), @(3 * 60), @(5 * 60), @(10 * 60), @(15 * 60)];
+    NSArray *array = @[@0, @(1 * 60), @(5 * 60), @(10 * 60), @(20 * 60), @(30 * 60), @(60 * 60)];
     NSInteger index = [array indexOfObject:[NSNumber numberWithInteger:self.selectedInterval]];
     switch (index) {
         case 0:
-            return NSLocalizedString(@"Don't repeat", nil);
+            return NSLocalizedString(@"Don't notify", nil);
         case 1:
-            return NSLocalizedString(@"In a minute", nil);
+            return NSLocalizedString(@"A minute before", nil);
         case 2:
-            return NSLocalizedString(@"In 2 minuties", nil);
+            return NSLocalizedString(@"Five minutes before", nil);
         case 3:
-            return NSLocalizedString(@"In 3 minuties", nil);
+            return NSLocalizedString(@"Ten minutes before", nil);
         case 4:
-            return NSLocalizedString(@"In 5 minuties", nil);
+            return NSLocalizedString(@"Twenty minutes before", nil);
         case 5:
-            return NSLocalizedString(@"In 10 minuties", nil);
+            return NSLocalizedString(@"Half an hour before", nil);
         default:
-            return NSLocalizedString(@"In 15 minuties", nil);
+            return NSLocalizedString(@"An hour before", nil);
     }
 }
 
@@ -277,13 +277,12 @@ CGRect tagViewRect;
     for (UIGestureRecognizer *recognizer in self.view.gestureRecognizers) {
         [self.view removeGestureRecognizer:recognizer];
     }
-
 }
 
 - (void)setDefaultSettings {
     self.datePicker.date = [NSDate date];
     self.selectedInterval = 0;
-    self.enteredText = @"Reminder";
+    self.enteredText = NSLocalizedString(@"Reminder", nil);
     self.selectedColor = RJTagColorNone;
 }
 

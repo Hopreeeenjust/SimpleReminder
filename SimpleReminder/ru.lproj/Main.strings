@@ -1,0 +1,99 @@
+
+/* Class = "UILabel"; text = "Text"; ObjectID = "2cX-jT-pKL"; */
+"2cX-jT-pKL.text" = "Текст";
+
+/* Class = "UILabel"; text = "Text"; ObjectID = "4rR-TX-bkP"; */
+"4rR-TX-bkP.text" = "Текст";
+
+/* Class = "UITabBarItem"; title = "Settings"; ObjectID = "7Ev-h2-iOw"; */
+"7Ev-h2-iOw.title" = "Настройки";
+
+/* Class = "UILabel"; text = "17:40"; ObjectID = "A9f-bd-Pdh"; */
+"A9f-bd-Pdh.text" = "17:40";
+
+/* Class = "UILabel"; text = "31.03.2015"; ObjectID = "AMY-bb-dXz"; */
+"AMY-bb-dXz.text" = "31.03.2015";
+
+/* Class = "UINavigationItem"; title = "Root View Controller"; ObjectID = "K3Q-a2-TMp"; */
+"K3Q-a2-TMp.title" = "Root View Controller";
+
+/* Class = "UIBarButtonItem"; title = "Edit"; ObjectID = "OAe-rB-2lR"; */
+"OAe-rB-2lR.title" = "Редактировать";
+
+/* Class = "UILabel"; text = "17:40"; ObjectID = "Q2B-tA-je2"; */
+"Q2B-tA-je2.text" = "17:40";
+
+/* Class = "UIBarButtonItem"; title = "Delete all"; ObjectID = "QBT-w7-if6"; */
+"QBT-w7-if6.title" = "Удалить все";
+
+/* Class = "UILabel"; text = "31.03.2015"; ObjectID = "VYB-AO-fw8"; */
+"VYB-AO-fw8.text" = "31.03.2015";
+
+/* Class = "UISegmentedControl"; WLV-6P-BgK.segmentTitles[0] = "By date"; ObjectID = "WLV-6P-BgK"; */
+"WLV-6P-BgK.segmentTitles[0]" = "По дате";
+
+/* Class = "UISegmentedControl"; WLV-6P-BgK.segmentTitles[1] = "By tags"; ObjectID = "WLV-6P-BgK"; */
+"WLV-6P-BgK.segmentTitles[1]" = "По тегам";
+
+/* Class = "UINavigationItem"; title = "New"; ObjectID = "WMT-Vu-Hzk"; */
+"WMT-Vu-Hzk.title" = "Новое";
+
+/* Class = "UILabel"; text = "31.03.2015"; ObjectID = "Yay-PH-6o5"; */
+"Yay-PH-6o5.text" = "31.03.2015";
+
+/* Class = "UILabel"; text = "Without tag"; ObjectID = "ZAb-O1-wM7"; */
+"ZAb-O1-wM7.text" = "Без тега";
+
+/* Class = "UILabel"; text = "Text"; ObjectID = "ZeB-Co-eGS"; */
+"ZeB-Co-eGS.text" = "Текст";
+
+/* Class = "UILabel"; text = "Text"; ObjectID = "aCK-uA-fS9"; */
+"aCK-uA-fS9.text" = "Текст";
+
+/* Class = "UILabel"; text = "Text"; ObjectID = "aQ6-s4-0Zr"; */
+"aQ6-s4-0Zr.text" = "Текст";
+
+/* Class = "UIBarButtonItem"; title = "Edit"; ObjectID = "cCf-b9-4bu"; */
+"cCf-b9-4bu.title" = "Редактировать";
+
+/* Class = "UILabel"; text = "Sort events"; ObjectID = "g06-HU-e98"; */
+"g06-HU-e98.text" = "Сортировать события";
+
+/* Class = "UILabel"; text = "No tag"; ObjectID = "gYE-Cf-hAr"; */
+"gYE-Cf-hAr.text" = "Без тега";
+
+/* Class = "UILabel"; text = "Repeat"; ObjectID = "j0C-lh-cbL"; */
+"j0C-lh-cbL.text" = "Напомнить";
+
+/* Class = "UILabel"; text = "Tag"; ObjectID = "k5y-Hi-Gj7"; */
+"k5y-Hi-Gj7.text" = "Тэг";
+
+/* Class = "UILabel"; text = "31.03.2015"; ObjectID = "lZp-Dl-Icn"; */
+"lZp-Dl-Icn.text" = "31.03.2015";
+
+/* Class = "UILabel"; text = "Don't repeat"; ObjectID = "muH-YI-okd"; */
+"muH-YI-okd.text" = "Не напоминать";
+
+/* Class = "UILabel"; text = "Sound"; ObjectID = "nuq-4l-KXL"; */
+"nuq-4l-KXL.text" = "Звук";
+
+/* Class = "UINavigationItem"; title = "Old"; ObjectID = "o6R-OZ-Thm"; */
+"o6R-OZ-Thm.title" = "Прошедшие";
+
+/* Class = "UILabel"; text = "Reminder"; ObjectID = "pN1-7e-cbE"; */
+"pN1-7e-cbE.text" = "Reminder";
+
+/* Class = "UILabel"; text = "Default"; ObjectID = "qM7-qM-QpT"; */
+"qM7-qM-QpT.text" = "Default";
+
+/* Class = "UILabel"; text = "9:20"; ObjectID = "tgT-wD-t9j"; */
+"tgT-wD-t9j.text" = "9:20";
+
+/* Class = "UINavigationItem"; title = "Root View Controller"; ObjectID = "uvH-zi-ICP"; */
+"uvH-zi-ICP.title" = "Root View Controller";
+
+/* Class = "UILabel"; text = "9:20"; ObjectID = "vCj-W5-e1D"; */
+"vCj-W5-e1D.text" = "9:20";
+
+/* Class = "UILabel"; text = "Automaticly delete past events"; ObjectID = "ynD-Lx-qGi"; */
+"ynD-Lx-qGi.text" = "Automaticly delete past events";
